@@ -1,0 +1,30 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o que.out
+#$ -e que.err
+#$ -j y
+#$ -r y
+#$ -q honda
+#$ -pe honda 28
+hostname
+date
+
+
+export plop_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results/zhouyu_rescore   # need to be changed
+export plop_path=/home/soft/plop/6.0   # need to be changed
+export plop_data=/home/soft/plop/6.0/data
+export mol2_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results  # need to be changed
+export LD_LIBRARY_PATH=$plop_path:$LD_LIBRARY_PATH
+
+sed -i 's/^[ ]*//g' *.ene
+# $plop_script/rescore/after_rescore/calculate_binding_energy.pl site1_FDA_pose      # sorted by "total_delta"(= com - rec - ligmin); default: lig_model = "min"
+#python3, pandas
+/home/yjcheng/miniconda3/bin/python ${mol2_script}/calculate_energy.py #sorted by "total_delta_fix"(= com - rec - ligfixmin) #That is to say: lig_model = "fix" 
+
+
+# 5. To extract minimized structure
+# $plop_script/rescore/after_rescore/extract_from_decoys.pl site1_FDA_pose 1000
+head -n 1001 output.test.sorted | sed "/Sort/d" > output.top1000.sorted
+perl ${mol2_script}/extract_from_decoys.pl top1000 1000 #Add important energy terms in "top1000-cmxminlig.pdb", so that we can see from Chimera
+# done

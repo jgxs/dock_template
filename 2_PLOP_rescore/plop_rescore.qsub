@@ -1,0 +1,25 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o que.out
+#$ -e que.err
+#$ -j y
+#$ -r y
+#$ -q honda
+#$ -pe honda 4
+hostname
+date
+
+export plop_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results/zhouyu_rescore   # need to be changed
+export plop_path=/home/soft/plop/6.0   # need to be changed
+export plop_data=/home/soft/plop/6.0/data
+export mol2_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results  # need to be changed
+export LD_LIBRARY_PATH=$plop_path:$LD_LIBRARY_PATH
+
+cp rec.pdb ligand_pose
+cd ligand_pose
+echo $mol2_script/opt.con | $plop_path/plop
+rm -r *tmp
+
+$plop_script/rescore/rescore2009/super_submit_2009.csh  ligand_pose  opls 2005 honda
+

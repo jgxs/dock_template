@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -cwd
+#$ -o split.out
+#$ -e que.err
+#$ -j y
+#$ -r y
+#$ -q honda
+#$ -pe honda 1
+hostname
+date
+
+export plop_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results/zhouyu_rescore   # need to be changed
+export plop_path=/home/soft/plop/6.0   # need to be changed
+export plop_data=/home/soft/plop/6.0/data
+export mol2_script=/home/yjcheng/handbook/2-Good-practices-in-research/Docking/PLOP-rescore-DOCK3.7-results  # need to be changed
+export LD_LIBRARY_PATH=$plop_path:$LD_LIBRARY_PATH
+
+/home/yjcheng/dock3.7/dock_template/2_PLOP_rescore/para_gen_opls2005.pl ligand_pose poses.mol2 honda . 250
