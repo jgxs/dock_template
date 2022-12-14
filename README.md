@@ -21,6 +21,7 @@ cp the protein file, named as `rec.pdb` and the ligand file, named as `xtal-lig.
 
 ```bash
 export DOCKBASE='/home/soft/ucsfdock/DOCK-3.7-bbe1a30c/'
+conda activate dock37
 /home/yjcheng/miniconda3/envs/dock37/bin/python $DOCKBASE/proteins/blastermaster/blastermaster.py --addhOptions=" -HIS -FLIPs " -v  
 ```
 
@@ -57,7 +58,7 @@ We will use `2_PLOP_rescore/mols_splits.qsub` to finish it.
 
 #### generate all ligands parameters 
 
-Then, after all jobs in step one finished, for the MM-GBSA calculation, we need the molecule parameters. We use `2_PLOP_rescore/mols_splits.qsub` too generate them.
+Then, after all jobs in step one finished, for the MM-GBSA calculation, we need the molecule parameters. We use `2_PLOP_rescore/mols_para_gen.qsub` too generate them.
 
 #### MM-GBSA calculation 
 
