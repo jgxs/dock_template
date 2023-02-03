@@ -68,8 +68,11 @@ After all parameters are generated, we will begin MM-GBSA calculation. We use `2
 
 Then, we use `2_PLOP_rescore/get_top_poses.qsub` to get new top results.
 
-## Chimera view dock results
+## Post propress of rescore
 
+After rescoring, we will get about 5000 molecules, which seems to bind the target. Now, we can cluster them based on fingerprints, use LUNA to prioritize the interaction and deprioritize based on ligand torsion. 
+
+Then use Chimera for visual inspection.
 [ViewDock Tutorial](https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/vdtut.html)
 
 
