@@ -25,6 +25,6 @@ sed -i 's/^[ ]*//g' *.ene
 
 # 5. To extract minimized structure
 # $plop_script/rescore/after_rescore/extract_from_decoys.pl site1_FDA_pose 1000
-head -n 1001 output.test.sorted | sed "/Sort/d" > output.top1000.sorted
+head -n 1000 output.test.sorted | sed "/Sort/d" > output.top1000.sorted
 perl ${mol2_script}/extract_from_decoys.pl top1000 1000 #Add important energy terms in "top1000-cmxminlig.pdb", so that we can see from Chimera
 # done

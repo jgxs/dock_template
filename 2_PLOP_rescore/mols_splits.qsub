@@ -20,14 +20,13 @@ export LD_LIBRARY_PATH=$plop_path:$LD_LIBRARY_PATH
 # 1. To generate small molecule parameters 
 
 $mol2_script/mol_split.pl poses.mol2 250 ligand_pose 2>> que.err
-/home/yjcheng/dock3.7/dock_template/2_PLOP_rescore/para_gen_opls2005.pl ligand_pose poses.mol2 honda . 250
+# /home/yjcheng/dock3.7/dock_template/2_PLOP_rescore/para_gen_opls2005.pl ligand_pose poses.mol2 honda . 250
 
 cd ligand_pose/mol_tmp
 
 ls |grep decoys |while read line 
 do
 cd $line 
-rm *mol2
 qsub /home/yjcheng/dock3.7/dock_template/2_PLOP_rescore/split_qsub.sh
 cd ..
 done 
